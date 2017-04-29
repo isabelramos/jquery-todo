@@ -31,6 +31,12 @@ var firebaseAPI = ((oldCrap) => {
 		});
 	};
 
+	oldCrap.checker = (id) => {
+		return new Promise ((resolve, reject) => {
+			firebaseAPI.setChecked(id);
+			resolve();
+		});
+	};
 
 	return oldCrap;
 

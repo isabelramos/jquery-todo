@@ -42,7 +42,14 @@ $(document).ready(function() {
 		$("#counter").hide().fadeIn(3000).html(remainingTasks);
 	};
 
-
+	$(".main-container").on("click", "input[type='checkbox']", (event) => {
+		firebaseAPI.checker(event.target.id).then(() => {
+			firebaseAPI.writeToDom();
+			countTask();
+		}).catch((error) => {
+			console.log("checker error", error);
+		});
+	});
 
 
 
