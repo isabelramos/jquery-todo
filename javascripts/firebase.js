@@ -5,6 +5,9 @@ var firebaseAPI = (() => {
 	return {
 		todoGetter : () => {
 			return todos;
+		},
+		setTodos : (newArray) => {
+			todos = newArray;
 		}
 	};
 

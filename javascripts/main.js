@@ -10,9 +10,8 @@ $(document).ready(function() {
 		$(".list-container").removeClass("hide");
 	});
 
-	firebaseAPI.getTodos()
-	.then((results) => {
-		console.log("results", results);
+	firebaseAPI.getTodos().then((results) => {
+		firebaseAPI.writeToDom();
 	})
 	.catch((error) => {
 		console.log("getTodos error", error);
