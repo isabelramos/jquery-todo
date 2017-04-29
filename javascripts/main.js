@@ -12,6 +12,7 @@ $(document).ready(function() {
 
 	firebaseAPI.getTodos().then((results) => {
 		firebaseAPI.writeToDom();
+		countTask();
 	})
 	.catch((error) => {
 		console.log("getTodos error", error);
@@ -29,13 +30,17 @@ $(document).ready(function() {
 			$(".new-container").addClass("hide");
 			$(".list-container").removeClass("hide");
 			firebaseAPI.writeToDom();
+			countTask();
 		}).catch((error) => {
 			console.log("addTodo error", error);
 		});
 	});
 
 
-
+	let countTask = () => {
+		let remainingTasks = $("#incomplete-tasks li").length;
+		$("#counter").hide().fadeIn(3000).html(remainingTasks);
+	};
 
 
 
