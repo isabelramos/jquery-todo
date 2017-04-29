@@ -8,6 +8,9 @@ var firebaseAPI = (() => {
 		},
 		setTodos : (newArray) => {
 			todos = newArray;
+		},
+		setSingleTodo : (newObject) => {
+			todos.push(newObject);
 		}
 	};
 

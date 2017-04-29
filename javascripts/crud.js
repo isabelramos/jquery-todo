@@ -22,6 +22,16 @@ var firebaseAPI = ((oldCrap) => {
 	};
 
 
+	oldCrap.addTodo = (newTodo) => {
+		return new Promise ((resolve, reject) => {
+			newTodo.id = `item${firebaseAPI.todoGetter().length}`;
+			console.log("newTodo", newTodo);
+			firebaseAPI.setSingleTodo(newTodo);
+			resolve();
+		});
+	};
+
+
 	return oldCrap;
 
 })(firebaseAPI || {});
