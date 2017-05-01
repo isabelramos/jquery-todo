@@ -38,6 +38,26 @@ var firebaseAPI = ((oldCrap) => {
 		});
 	};
 
+	oldCrap.deleteTodo = (id) => {
+		return new Promise ((resolve, reject) => {
+			firebaseAPI.duhlete(id);
+			resolve();
+		});
+	};
+
 	return oldCrap;
 
 })(firebaseAPI || {});
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -36,6 +36,15 @@ $(document).ready(function() {
 		});
 	});
 
+	$(".main-container").on("click", ".delete", (event) => {
+		firebaseAPI.deleteTodo(event.target.id).then(() => {
+			firebaseAPI.writeToDom();
+			countTask();
+		}).catch((error) => {
+			console.log("error in deleteTodo", error);
+		});
+	});
+
 
 	let countTask = () => {
 		let remainingTasks = $("#incomplete-tasks li").length;

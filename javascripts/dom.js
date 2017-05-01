@@ -4,7 +4,6 @@ var firebaseAPI = ((otherOldCrap) => {
 		let todos = firebaseAPI.todoGetter();
 		let doneString = "";
 		let notDoneString = "";
-		console.log("todos in writeToDom", todos);
 
 	todos.forEach((todo) => {
 	    if (todo.isCompleted) {
