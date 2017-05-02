@@ -1,19 +1,16 @@
-var firebaseAPI = ((oldCrap) => {
+var firebaseApi = ((oldCrap) => {
 
-	oldCrap.getTodos = () => {
-
+	oldCrap.getTodos = (apiKeys) => {
+		let items = [];
 		return new Promise ((resolve, reject) => {
-			let items = [];
-			$.ajax("./database/seed.json")
+			$.ajax(`${apiKeys.databaseURL}/items.json`)
 			.done((data) => {
-				let response = data.items;
+				let response = data;
 				Object.keys(response).forEach((key) => {
-					console.log("key", key);
 					response[key].id = key;
 					items.push(response[key]);
 				});
-				firebaseAPI.setTodos(items);
-				resolve();
+				resolve(items);
 			})
 			.fail((error) => {
 				reject(error);
@@ -22,39 +19,58 @@ var firebaseAPI = ((oldCrap) => {
 	};
 
 
-	oldCrap.addTodo = (newTodo) => {
+	oldCrap.addTodo = (apiKeys, newTodo) => {
 		return new Promise ((resolve, reject) => {
-			newTodo.id = `item${firebaseAPI.todoGetter().length}`;
-			console.log("newTodo", newTodo);
-			firebaseAPI.setSingleTodo(newTodo);
+			$.ajax({
+				method: "POST",
+				url: `${apiKeys.databaseURL}/items.json`,
+				data: JSON.stringify(newTodo)
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject(error);
+			});
+		resolve();
+		});
+	};
+
+	oldCrap.checker = (apiKeys, id) => {
+		return new Promise ((resolve, reject) => {
+			firebaseApi.setChecked(id);
 			resolve();
 		});
 	};
 
-	oldCrap.checker = (id) => {
+	oldCrap.deleteTodo = (apiKeys, id) => {
 		return new Promise ((resolve, reject) => {
-			firebaseAPI.setChecked(id);
-			resolve();
+			$.ajax({
+				method: "DELETE",
+				url: `${apiKeys.databaseURL}/items/${id}.json`
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject(error);
+			});
 		});
 	};
 
-	oldCrap.deleteTodo = (id) => {
+	oldCrap.editTodo = (apiKeys, editTodo, id) => {
 		return new Promise ((resolve, reject) => {
-			firebaseAPI.duhlete(id);
-			resolve();
-		});
-	};
-
-	oldCrap.editTodo = (id) => {
-		return new Promise ((resolve, reject) => {
-			firebaseAPI.duhlete(id);
-			resolve();
+			$.ajax({
+				method: "PUT",
+				url: `${apiKeys.databaseURL}/items/${id}.json`,
+				data: JSON.stringify(editTodo)
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject(error);
+			});
 		});
 	};
 
 	return oldCrap;
 
-})(firebaseAPI || {});
+})(firebaseApi || {});
 
 
 
