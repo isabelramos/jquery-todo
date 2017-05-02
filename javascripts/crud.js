@@ -1,19 +1,17 @@
-var firebaseAPI = ((oldCrap) => {
+var firebaseApi = ((oldCrap) => {
 
-	oldCrap.getTodos = () => {
-
+	oldCrap.getTodos = (apiKeys) => {
+		let items = [];
 		return new Promise ((resolve, reject) => {
-			let items = [];
-			$.ajax("./database/seed.json")
+			$.ajax(`${apiKeys.databaseURL}/items.json`)
 			.done((data) => {
-				let response = data.items;
+				let response = data;
 				Object.keys(response).forEach((key) => {
 					console.log("key", key);
 					response[key].id = key;
 					items.push(response[key]);
 				});
-				firebaseAPI.setTodos(items);
-				resolve();
+				resolve(items);
 			})
 			.fail((error) => {
 				reject(error);
@@ -24,37 +22,37 @@ var firebaseAPI = ((oldCrap) => {
 
 	oldCrap.addTodo = (newTodo) => {
 		return new Promise ((resolve, reject) => {
-			newTodo.id = `item${firebaseAPI.todoGetter().length}`;
+			newTodo.id = `item${firebaseApi.todoGetter().length}`;
 			console.log("newTodo", newTodo);
-			firebaseAPI.setSingleTodo(newTodo);
+			firebaseApi.setSingleTodo(newTodo);
 			resolve();
 		});
 	};
 
 	oldCrap.checker = (id) => {
 		return new Promise ((resolve, reject) => {
-			firebaseAPI.setChecked(id);
+			firebaseApi.setChecked(id);
 			resolve();
 		});
 	};
 
 	oldCrap.deleteTodo = (id) => {
 		return new Promise ((resolve, reject) => {
-			firebaseAPI.duhlete(id);
+			firebaseApi.duhlete(id);
 			resolve();
 		});
 	};
 
 	oldCrap.editTodo = (id) => {
 		return new Promise ((resolve, reject) => {
-			firebaseAPI.duhlete(id);
+			firebaseApi.duhlete(id);
 			resolve();
 		});
 	};
 
 	return oldCrap;
 
-})(firebaseAPI || {});
+})(firebaseApi || {});
 
 
 
