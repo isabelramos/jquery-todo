@@ -20,7 +20,7 @@ var firebaseApi = ((oldCrap) => {
 	};
 
 
-	oldCrap.addTodo = (newTodo) => {
+	oldCrap.addTodo = (apiKeys, newTodo) => {
 		return new Promise ((resolve, reject) => {
 			newTodo.id = `item${firebaseApi.todoGetter().length}`;
 			console.log("newTodo", newTodo);
@@ -29,21 +29,27 @@ var firebaseApi = ((oldCrap) => {
 		});
 	};
 
-	oldCrap.checker = (id) => {
+	oldCrap.checker = (apiKeys, id) => {
 		return new Promise ((resolve, reject) => {
 			firebaseApi.setChecked(id);
 			resolve();
 		});
 	};
 
-	oldCrap.deleteTodo = (id) => {
+	oldCrap.deleteTodo = (apiKeys, id) => {
 		return new Promise ((resolve, reject) => {
-			firebaseApi.duhlete(id);
-			resolve();
+			$.ajax({
+				method: "DELETE",
+				url: `${apiKeys.databaseURL}/items/${id}.json`
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject(error);
+			});
 		});
 	};
 
-	oldCrap.editTodo = (id) => {
+	oldCrap.editTodo = (apiKeys, id) => {
 		return new Promise ((resolve, reject) => {
 			firebaseApi.duhlete(id);
 			resolve();

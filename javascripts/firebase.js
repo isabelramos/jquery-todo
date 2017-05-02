@@ -11,8 +11,8 @@ var firebaseApi =  (() => {
 				})
 				.fail((error) => {
 					reject(error);
-				})
-			})
+				});
+			});
 		}
 	};
 })();
