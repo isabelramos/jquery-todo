@@ -7,7 +7,6 @@ var firebaseApi = ((oldCrap) => {
 			.done((data) => {
 				let response = data;
 				Object.keys(response).forEach((key) => {
-					console.log("key", key);
 					response[key].id = key;
 					items.push(response[key]);
 				});
@@ -55,10 +54,17 @@ var firebaseApi = ((oldCrap) => {
 		});
 	};
 
-	oldCrap.editTodo = (apiKeys, id) => {
+	oldCrap.editTodo = (apiKeys, editTodo, id) => {
 		return new Promise ((resolve, reject) => {
-			firebaseApi.duhlete(id);
-			resolve();
+			$.ajax({
+				method: "PUT",
+				url: `${apiKeys.databaseURL}/items/${id}.json`,
+				data: JSON.stringify(editTodo)
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject(error);
+			});
 		});
 	};
 

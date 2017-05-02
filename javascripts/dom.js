@@ -10,7 +10,6 @@ var firebaseApi = ((otherOldCrap) => {
       	let todos = results;
     	let doneString = "";
     	let notDoneString = "";
-    	console.log("todos in writeToDom", todos);
 
     	todos.forEach((todo) => {
     		if (todo.isCompleted) {
