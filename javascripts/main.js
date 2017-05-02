@@ -35,7 +35,7 @@ $(document).ready(function() {
 			task: $("#add-todo-text").val()
 		};
 		console.log("newTodo", newTodo);
-		firebaseApi.addTodo(newTodo).then(() => {
+		firebaseApi.addTodo(apiKeys, newTodo).then(() => {
 			$("#add-todo-text").val("");
 			$(".new-container").addClass("hide");
 			$(".list-container").removeClass("hide");

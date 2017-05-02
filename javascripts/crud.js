@@ -22,10 +22,16 @@ var firebaseApi = ((oldCrap) => {
 
 	oldCrap.addTodo = (apiKeys, newTodo) => {
 		return new Promise ((resolve, reject) => {
-			newTodo.id = `item${firebaseApi.todoGetter().length}`;
-			console.log("newTodo", newTodo);
-			firebaseApi.setSingleTodo(newTodo);
-			resolve();
+			$.ajax({
+				method: "POST",
+				url: `${apiKeys.databaseURL}/items.json`,
+				data: JSON.stringify(newTodo)
+			}).done(() => {
+				resolve();
+			}).fail((error) => {
+				reject(error);
+			});
+		resolve();
 		});
 	};
 
