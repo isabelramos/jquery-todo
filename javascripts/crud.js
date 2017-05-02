@@ -45,6 +45,13 @@ var firebaseAPI = ((oldCrap) => {
 		});
 	};
 
+	oldCrap.editTodo = (id) => {
+		return new Promise ((resolve, reject) => {
+			firebaseAPI.duhlete(id);
+			resolve();
+		});
+	};
+
 	return oldCrap;
 
 })(firebaseAPI || {});

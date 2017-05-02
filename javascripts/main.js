@@ -45,6 +45,17 @@ $(document).ready(function() {
 		});
 	});
 
+		$(".main-container").on("click", ".edit", (event) => {
+			let editText = $(event.target).closest(".col-xs-4").siblings(".col-xs-8").find(".task").html();
+		firebaseAPI.editTodo(event.target.id).then(() => {
+			$(".list-container").addClass("hide");
+			$(".new-container").removeClass("hide");
+			$("#add-todo-text").val(editText);
+		}).catch((error) => {
+			console.log("error in editTodo", error);
+		});
+	});
+
 
 	let countTask = () => {
 		let remainingTasks = $("#incomplete-tasks li").length;
