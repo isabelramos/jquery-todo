@@ -80,7 +80,19 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#register-button").click(() => {
+		let email = $("#input-email").val();
+		let password = $("#input-password").val();
+		let uername = $("#input-user").val();
 
+		let user = {email, password};
+
+		firebaseApi.registerUser(user).then((response) => {
+			console.log("register response", response);
+		}).catch((error) => {
+			console.log("error in registerUser", error);
+		});
+	});
 
 
 
