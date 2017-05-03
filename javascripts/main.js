@@ -83,12 +83,21 @@ $(document).ready(function() {
 	$("#register-button").click(() => {
 		let email = $("#input-email").val();
 		let password = $("#input-password").val();
-		let uername = $("#input-user").val();
+		let username = $("#input-username").val();
 
 		let user = {email, password};
 
 		firebaseApi.registerUser(user).then((response) => {
-			console.log("register response", response);
+			console.log("register response", response.uid);
+			let newUser = {
+				uid: response.uid,
+				username: username
+			};
+			firebaseApi.addUser(apiKeys, newUser).then((response) => {
+				console.log("response", response);
+			}).catch((error) => {
+				console.log("error in addUser", error);
+			});
 		}).catch((error) => {
 			console.log("error in registerUser", error);
 		});

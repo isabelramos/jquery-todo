@@ -12,5 +12,15 @@
       "isCompleted" : false,
       "task" : "take a nap"
     }
+  },
+  "users": {
+    "user0": {
+      "uid": "Ckr0OOedbqQxTkTenRys7XBMvxu2",
+      "username": "isabel"
+    },
+    "user1": {
+      "uid": "zoYaATmIKmRgffLbM1qoTGR4X9Z2",
+      "username": "not_isabel"
+    }
   }
 }
