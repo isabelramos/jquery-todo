@@ -94,7 +94,21 @@ $(document).ready(function() {
 				username: username
 			};
 			firebaseApi.addUser(apiKeys, newUser).then((response) => {
-				console.log("response", response);
+				$("#login-button").click(() => {
+				let email = $("#input-email").val();
+				let password = $("#input-password").val();
+
+				let user = {email, password};
+				firebaseApi.loginUser(user).then((response) => {
+					clearLogin();
+					$("#login-container").addClass("hide");
+					$(".main-container").removeClass("hide");
+					firebaseApi.writeToDom(apiKeys);
+				}).catch((error) => {
+					console.log("error in loginUser", error);
+				});
+			});
+
 			}).catch((error) => {
 				console.log("error in addUser", error);
 			});
@@ -103,8 +117,27 @@ $(document).ready(function() {
 		});
 	});
 
+	let clearLogin = () => {
+		$("#input-email").val("");
+		$("#input-password").val("");
+		$("#input-username").val("");
 
+	};
 
+	$("#login-button").click(() => {
+		let email = $("#input-email").val();
+		let password = $("#input-password").val();
+
+		let user = {email, password};
+		firebaseApi.loginUser(user).then((response) => {
+			clearLogin();
+			$("#login-container").addClass("hide");
+			$(".main-container").removeClass("hide");
+			firebaseApi.writeToDom(apiKeys);
+		}).catch((error) => {
+			console.log("error in loginUser", error);
+		});
+	});
 
 
 
