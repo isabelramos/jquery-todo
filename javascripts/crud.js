@@ -21,6 +21,7 @@ var firebaseApi = ((oldCrap) => {
 
 
 	oldCrap.addTodo = (apiKeys, newTodo) => {
+		newTodo.uid = firebaseApi.credentialsCurrentUser().uid;
 		return new Promise ((resolve, reject) => {
 			$.ajax({
 				method: "POST",
@@ -56,6 +57,7 @@ var firebaseApi = ((oldCrap) => {
 	};
 
 	oldCrap.editTodo = (apiKeys, editTodo, id) => {
+		editTodo.uid = firebaseApi.credentialsCurrentUser().uid;
 		return new Promise ((resolve, reject) => {
 			$.ajax({
 				method: "PUT",

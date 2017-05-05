@@ -32,7 +32,7 @@ $(document).ready(function() {
 				$(".new-container").addClass("hide");
 				$(".list-container").removeClass("hide");
 				firebaseApi.writeToDom(apiKeys);
-				countTask();
+				firebaseApi.countTask();
 			}).catch((error) => {
 				console.log("addTodo error", error);
 			});
@@ -42,7 +42,7 @@ $(document).ready(function() {
 				$(".new-container").addClass("hide");
 				$(".list-container").removeClass("hide");
 				firebaseApi.writeToDom(apiKeys);
-				countTask();
+				firebaseApi.countTask();
 			}).catch((error) => {
 				console.log("addTodo error", error);
 			});
