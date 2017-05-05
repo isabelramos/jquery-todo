@@ -133,13 +133,19 @@ $(document).ready(function() {
 			clearLogin();
 			$("#login-container").addClass("hide");
 			$(".main-container").removeClass("hide");
+			firebaseApi.createLogoutButton(apiKeys);
 			firebaseApi.writeToDom(apiKeys);
 		}).catch((error) => {
 			console.log("error in loginUser", error);
 		});
 	});
 
-
+	$("#logout-container").on("click", "#logout-button", () => {
+		clearLogin();
+		firebaseApi.logoutUser();
+		$("#login-container").removeClass("hide");
+		$(".main-container").addClass("hide");
+	});
 
 
 

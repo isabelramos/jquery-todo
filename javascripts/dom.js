@@ -45,6 +45,30 @@ var firebaseApi = ((otherOldCrap) => {
 	    });
 	};
 
+	otherOldCrap.createLogoutButton = (apiKey) => {
+		let uid = firebaseApi.credentialsCurrentUser().uid;
+		firebaseApi.getUser(apiKey, uid).then((user) => {
+			let logoutButton = `<button class="btn btn-danger" id="logout-button">Logout ${user.username}</button>`;
+			$("#logout-container").html(logoutButton);
+		});
+	};
+
 
   return otherOldCrap;
 })(firebaseApi || {});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
